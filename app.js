@@ -49,15 +49,21 @@ const updateHud = async () => {
 }
 
 const startGame = async () => {
+	if (playing) return;
+
+	// Show/hide elements:
+	titleElement.style.display = 'none';
+	correctBtn.style.display = 'block';
+	passBtn.style.display = 'block';
+
 	playing = true;
 	score = 0;
-	timeLeft = 60;
+	timeLeft = 7;
 	resultsPool = [];
 	resultsText.innerHTML = "";
 	updateHud();
 	resetPool();
 	nextItem();
-	startBtn.disabled = true;
 	if (typeof correctBtn !== 'undefined') correctBtn.disabled = false;
 	if (typeof passBtn !== 'undefined') passBtn.disabled = false;
 
@@ -76,7 +82,6 @@ const stopGame = async () => {
 	timerId = null;
 	correctBtn.disabled = true;
 	passBtn.disabled = true;
-	startBtn.disabled = false;
 	itemText.textContent = `Final score: ${score}`;
 	resultsText.innerHTML = `
 		<ul class="results-list">
@@ -94,6 +99,29 @@ const flashScreen = async (colorClass) => {
 	setTimeout(() => appElement.classList.remove(colorClass), 220);
 }
 
+const handleButtonPress = async (type) => {
+	if (!playing) return;
+
+	// Correct answer
+	if (type === "correct" || type === 1) {
+		score += 1;
+		flashScreen("flash-green");
+		resultsPool.push(`${activeItem} ✅`);
+	}
+	// Pass answer
+	else if (type === "pass" || type === 0) {
+		flashScreen("flash-red");
+		resultsPool.push(`${activeItem} ❌`);
+	}
+	else {
+		return;
+	}
+	
+
+	updateHud();
+	nextItem();
+}
+
 // Game state
 let score = 0;
 let timeLeft;
@@ -106,16 +134,18 @@ let activeItem;
 let resultsPool = [];
 
 // Elements
+const titleElement = document.getElementById("title");
 const itemText = document.getElementById("item-text");
 const resultsText = document.getElementById("results-text");
 const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("score");
-const startBtn = document.getElementById("start-btn");
 const correctBtn = document.getElementById("correct-btn");
 const passBtn = document.getElementById("pass-btn");
 const appElement = document.querySelector(".app");
 
-
+// On page load, hide control buttons:
+correctBtn.style.display = 'none';
+passBtn.style.display = 'none';
 
 let data = await loadItems();
 let activeSet = await flattenFromKeys(data, [
@@ -127,23 +157,17 @@ items = await shuffleArray(activeSet);
 console.log(items);
 
 
+// App element events:
+appElement.addEventListener("pointerdown", startGame);
 
-startBtn.addEventListener("click", startGame);
 
-correctBtn.addEventListener("click", () => {
-	if (!playing) return;
-	score += 1;
-	updateHud();
-	flashScreen("flash-green");
-	resultsPool.push(`${activeItem} ✅`);
-	nextItem();
+// Correct button interactions:
+correctBtn.addEventListener("pointerdown", () => {
+	handleButtonPress("correct");
 });
 
-if (passBtn) {
-	passBtn.addEventListener("click", () => {
-		if (!playing) return;
-		flashScreen("flash-red");
-		resultsPool.push(`${activeItem} ❌`);
-		nextItem();
-	});
-}
+// Pass button interactions:
+passBtn.addEventListener("pointerdown", () => {
+	handleButtonPress("pass");
+});
+

@@ -3,7 +3,7 @@
 	--fg: #f5f5f5;
 	--muted: #9aa0a6;
 	--correct: #36d399;
-	--pass: #ef9f44;
+	--pass: rgb(194, 57, 57);
 }
 
 * {
@@ -11,6 +11,7 @@
 }
 
 body {
+	touch-action: manipulation;
 	font-family: "Momo Trust Display", sans-serif;
 	font-weight: 200;
 	font-style: normal;
@@ -35,34 +36,50 @@ body {
 	justify-content: space-between;
 	font-size: 20px;
 	color: var(--muted);
+	padding: 0;
+	margin: 0;
 }
 
 #item-area {
-	display: grid;
-	place-items: center;
 	text-align: center;
+	margin-top: 2rem;
+}
+
+#title {
+	font-size: clamp(50px, 8vw, 72px);
+	font-weight: 700;
+	margin: 0;
+	line-height: 1.1;
+	color: orange;
+	text-shadow: red 2px 5px;
 }
 
 #item-text {
-	font-size: clamp(32px, 8vw, 72px);
+	font-size: clamp(28px, 6vw, 72px);
 	font-weight: 700;
+	padding-top: 1rem;
 	margin: 0;
 	line-height: 1.1;
 }
 
 #results-text {
-	margin-top: 16px;
-	max-height: 160px;
 	overflow-y: auto;
-	width: 100%;
+	width: 75%;
+	max-height: 50%;
+	margin: 0 auto;      /* center the block itself */
+	text-align: center;  /* center inline text inside */
 }
 
 .results-list {
 	list-style: none;
+	display: grid;
+	align-items: center;
+	justify-items: center; /* center each list item in the grid */
 	padding: 0;
 	margin: 0;
-	text-align: left;
+	text-align: center;   /* center text within each li */
 	font-size: 16px;
+	max-height: 50%;
 }
 
 .results-list li {
@@ -73,16 +90,19 @@ body {
 	display: flex;
 	justify-content: center;
 	gap: 16px;
+	padding-bottom: 1rem;
 }
 
 button {
 	background: #1f2937;
 	color: var(--fg);
 	border: 1px solid #2d3748;
-	padding: 12px 20px;
 	border-radius: 10px;
 	font-size: 18px;
 	cursor: pointer;
+	width: 40vw;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
 }
 
 button:disabled {

@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
     <title>BrainFreeze</title>
     <link rel="icon" type="image/x-icon" href="./brain.png">
     <link rel="stylesheet" href="style.css" />
@@ -21,13 +23,14 @@
         </header>
 
         <main id="item-area">
-            <p id="item-text">Press Start</p>
+            <p id="title">Guess Fest</p>
+            <!-- <p id="subtitle">Describe the things on screen to the other player without directly saying the words on screen!</p> -->
+            <p id="item-text">Tap to Start</p>
             <div id="results-text" aria-label="Round results"></div>
         </main>
 
         <footer class="controls">
             <button id="pass-btn" disabled>Pass</button>
-            <button id="start-btn">Start</button>
             <button id="correct-btn" disabled>Correct</button>
         </footer>
     </div>
