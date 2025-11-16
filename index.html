@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BrainFreeze</title>
+    <link rel="icon" type="image/x-icon" href="./brain.png">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
+    <script type="module" src="app.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <header class="hud">
+            <div class="hud-item">Time: <span id="timer">60</span>s</div>
+            <div class="hud-item">Score: <span id="score">0</span></div>
+        </header>
+
+        <main id="item-area">
+            <p id="item-text">Press Start</p>
+            <div id="results-text" aria-label="Round results"></div>
+        </main>
+
+        <footer class="controls">
+            <button id="pass-btn" disabled>Pass</button>
+            <button id="start-btn">Start</button>
+            <button id="correct-btn" disabled>Correct</button>
+        </footer>
+    </div>
+</body>
+
+</html>
