@@ -45,6 +45,16 @@ body {
 	margin-top: 2rem;
 }
 
+@media (orientation: landscape) {
+	#item-area {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center; /* center Final score + list */
+		margin-top: 0;          /* remove extra top space in landscape */
+	}
+}
+
 #title {
 	font-size: clamp(50px, 8vw, 72px);
 	font-weight: 700;
@@ -65,21 +75,20 @@ body {
 #results-text {
 	overflow-y: auto;
 	width: 75%;
-	max-height: 50%;
-	margin: 0 auto;      /* center the block itself */
-	text-align: center;  /* center inline text inside */
+	max-height: 40vh;   /* cap height relative to viewport so buttons stay visible */
+	margin: 0 auto;
+	text-align: center;  
 }
 
 .results-list {
 	list-style: none;
 	display: grid;
 	align-items: center;
-	justify-items: center; /* center each list item in the grid */
+	justify-items: center;
 	padding: 0;
 	margin: 0;
-	text-align: center;   /* center text within each li */
+	text-align: center;
 	font-size: 16px;
-	max-height: 50%;
 }
 
 .results-list li {
@@ -126,6 +135,12 @@ button:disabled {
 	background: var(--pass);
 	border-color: #dc2626;
 	color: #1b0a0a;
+	font-weight: 700;
+}
+
+#play-again-btn {
+	border-color: white;
+	color: white;
 	font-weight: 700;
 }
 

@@ -53,12 +53,13 @@ const startGame = async () => {
 
 	// Show/hide elements:
 	titleElement.style.display = 'none';
+	playAgainBtn.style.display = 'none';
 	correctBtn.style.display = 'block';
 	passBtn.style.display = 'block';
 
 	playing = true;
 	score = 0;
-	timeLeft = 7;
+	timeLeft = 60;
 	resultsPool = [];
 	resultsText.innerHTML = "";
 	updateHud();
@@ -77,6 +78,12 @@ const startGame = async () => {
 }
 
 const stopGame = async () => {
+	correctBtn.style.display = 'none';
+	passBtn.style.display = 'none';
+	playAgainBtn.style.display = 'block';
+	
+	resultsDisplay = true;
+	
 	playing = false;
 	clearInterval(timerId);
 	timerId = null;
@@ -122,11 +129,25 @@ const handleButtonPress = async (type) => {
 	nextItem();
 }
 
+const handleGameStart = async () => {
+	if (playing) {
+		return
+	}
+
+	else if (!playing && resultsDisplay) {
+		return
+	}
+	else {
+		startGame();
+	}
+}
+
 // Game state
 let score = 0;
 let timeLeft;
 let timerId = null;
 let playing = false;
+let resultsDisplay = false;
 let pool = [];
 let items = [];
 let activeItem;
@@ -141,11 +162,13 @@ const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("score");
 const correctBtn = document.getElementById("correct-btn");
 const passBtn = document.getElementById("pass-btn");
+const playAgainBtn = document.getElementById("play-again-btn");
 const appElement = document.querySelector(".app");
 
 // On page load, hide control buttons:
 correctBtn.style.display = 'none';
 passBtn.style.display = 'none';
+playAgainBtn.style.display = 'none';
 
 let data = await loadItems();
 let activeSet = await flattenFromKeys(data, [
@@ -158,7 +181,9 @@ console.log(items);
 
 
 // App element events:
-appElement.addEventListener("pointerdown", startGame);
+appElement.addEventListener("pointerdown", () => {
+	handleGameStart();
+});
 
 
 // Correct button interactions:
@@ -169,5 +194,10 @@ correctBtn.addEventListener("pointerdown", () => {
 // Pass button interactions:
 passBtn.addEventListener("pointerdown", () => {
 	handleButtonPress("pass");
+});
+
+// Replay button interactions:
+playAgainBtn.addEventListener("pointerdown", () => {
+	startGame();
 });
 
