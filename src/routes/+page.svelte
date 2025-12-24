@@ -1,22 +1,7 @@
 <script>
-    import { onMount } from "svelte";
     import { game } from "./game.svelte";
 
     let guessFest = new game;
-
-    onMount(() => {
-        // Prevent double tap to zoom globally (even on buttons etc).
-        let lastTouch = 0;
-        document.addEventListener('touchstart', (e) => {
-            const now = Date.now();
-            if (now - lastTouch <= 300) {
-                e.preventDefault(); // prevents double-tap zoom
-            }
-            lastTouch = now;
-        }, { passive: false });
-    });
-
-
 </script>
 
 
@@ -33,7 +18,7 @@
             </div>
             
             <div class="play-button">
-                <button onclick={() => guessFest.startGame()}>
+                <button on:click={() => guessFest.startGame()}>
                     <p>PLAY</p>
                 </button>
             </div>
@@ -50,10 +35,16 @@
             </div>
             
             <div class="controls">
-                <button class="pass-btn" onclick={() => guessFest.passBtn()}>
+                <button
+                    class="pass-btn"
+                    on:pointerdown|preventDefault={() => guessFest.passBtn()}
+                >
                     <p>PASS</p>
                 </button>
-                <button class="correct-btn" onclick={() => guessFest.correctBtn()}>
+                <button
+                    class="correct-btn"
+                    on:pointerdown|preventDefault={() => guessFest.correctBtn()}
+                >
                     <p>CORRECT</p>
                 </button>
             </div>
@@ -83,7 +74,7 @@
             </div>
             
             <div class="play-button">
-                <button onclick={() => guessFest.restart()}>
+                <button on:click={() => guessFest.restart()}>
                     <p>PLAY AGAIN</p>
                 </button>
             </div>

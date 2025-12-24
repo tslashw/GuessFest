@@ -14,7 +14,7 @@ export class game {
     })
 
 
-    timeTotal = 5;
+    timeTotal = 60;
     timeLeft = $state(0);
     activeTimer = null;
     
