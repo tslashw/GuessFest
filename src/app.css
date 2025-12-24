@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root {
+    --title-font: "DynaPuff";
+    --main-font: "Ubuntu";
+}
+
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+.app {
+    height: 100vh;
+    width: 100vw;
+
+    background-color: black;
+
+    color: white;
+
+    font-family: var(--title-font);
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 100vw;
+    grid-template-rows: 20vh 60vh 20vh;
+}
+
+
+.main-title {
+    place-self: center;
+    justify-self: stretch;
+    /* make title container span full column width */
+}
+
+.main-title h1 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    padding: 0;
+    margin: 0;
+
+    color: orange;
+    text-shadow: purple 0.5rem 0.5rem;
+    text-align: center;
+    /* center text inside full-width container */
+}
+
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    font-family: var(--main-font);
+}
+
+.play-button button {
+    background-color: orange;
+    font-family: var(--main-font);
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 3rem;
+}
+
+.play-button button:hover {
+    cursor: pointer;
+}
+
+
+
+/* During gameplay: */
+
+.controls {
+    display: flex;
+    flex-direction: row;
+}
+
+.controls button {
+    width: 50%;
+    border: none;
+    font-family: var(--main-font);
+    font-size: 2.5rem;
+}
+
+
+@keyframes flashRed {
+    0% {
+        background-color: black;
+    }
+
+    50% {
+        background-color: red;
+    }
+
+    100% {
+        background-color: black;
+    }
+}
+
+.anim-flash-red {
+    animation: flashRed 0.1s ease-in-out;
+}
+
+@keyframes flashGreen {
+    0% {
+        background-color: black;
+    }
+
+    50% {
+        background-color: green;
+    }
+
+    100% {
+        background-color: black;
+    }
+}
+
+.anim-flash-green {
+    animation: flashGreen 0.1s ease-in-out;
+}
+
+
+.pass-btn {
+    background-color: red;
+}
+
+.correct-btn {
+    background-color: green;
+}
+
+
+
+/* Game over: */
+
+.score {
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-font);
+}
+
+.game-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    overflow-y: auto;
+}
+
+.game-overview h2 {
+    padding: 0;
+    margin: 0;
+}
