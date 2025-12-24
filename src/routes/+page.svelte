@@ -1,18 +1,20 @@
 <script>
+    import { onMount } from "svelte";
     import { game } from "./game.svelte";
 
     let guessFest = new game;
 
-    
-    // Prevent double tap to zoom globally (even on buttons etc).
-    let lastTouch = 0;
-    document.addEventListener('touchstart', (e) => {
-    const now = Date.now();
-    if (now - lastTouch <= 300) {
-        e.preventDefault(); // prevents double-tap zoom
-    }
-    lastTouch = now;
-    }, { passive: false });
+    onMount(() => {
+        // Prevent double tap to zoom globally (even on buttons etc).
+        let lastTouch = 0;
+        document.addEventListener('touchstart', (e) => {
+            const now = Date.now();
+            if (now - lastTouch <= 300) {
+                e.preventDefault(); // prevents double-tap zoom
+            }
+            lastTouch = now;
+        }, { passive: false });
+    });
 
 
 </script>
