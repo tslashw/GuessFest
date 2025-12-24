@@ -10,11 +10,13 @@
 html {
     padding: 0;
     margin: 0;
+    background-color: black;
 }
 
 body {
     padding: 0;
     margin: 0;
+    background-color: black;
 }
 
 
@@ -27,6 +29,17 @@ body {
     color: white;
 
     font-family: var(--title-font);
+}
+
+/* Use dynamic viewport height where supported (iOS Safari, modern browsers) */
+@supports (height: 100dvh) {
+    .app {
+        height: 100dvh;
+    }
+
+    .container {
+        height: 100dvh;
+    }
 }
 
 .container {
