@@ -85,6 +85,7 @@ body {
     width: 100%;
     height: 100%;
     font-size: 3rem;
+    color: black;
 }
 
 .play-button button:hover {
@@ -106,6 +107,8 @@ body {
     font-family: var(--main-font);
     font-size: 2.5rem;
     touch-action: manipulation; /* hint browsers not to double-tap zoom on these buttons */
+    color: black;
+
 }
 
 
